@@ -7,7 +7,7 @@
 #endif
 #define SIZE (1 << 16) // 65536
 
-#define NUMTRIES 1024 // you decide
+#define NUMTRIES 1024
 
 float A[SIZE];
 float B[SIZE];
