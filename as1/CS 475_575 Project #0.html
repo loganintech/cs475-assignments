@@ -1,0 +1,267 @@
+<html>
+
+<head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+        <title>
+                CS 475/575 Project #0
+        </title>
+
+</head>
+
+<body background="CS%20475_575%20Project%20%230_files/backgr.jpg">
+
+        <center>
+                <img src="CS%20475_575%20Project%20%230_files/osu.jpg" align="middle">
+                <h2>CS 475/575 -- Spring Quarter 2020</h2>
+                <h2>Project #0</h2>
+                <h3>Simple OpenMP Experiment</h3>
+                <h3>30 Points</h3>
+                <h3>Due: April 6</h3>
+        </center>
+
+
+        <p>
+        </p>
+        <hr size="4">
+        <p>
+
+                <i>This page was last updated: March 22, 2020</i>
+
+
+        </p>
+        <p>
+        </p>
+        <hr size="4">
+        <p>
+
+        </p>
+        <h3>Introduction</h3>
+
+        <p>
+                A great use for parallel programming is identical operations on large arrays of numbers.
+
+
+        </p>
+        <p>
+        </p>
+        <h3>Requirements</h3>
+
+        <ol>
+
+                <p>
+                </p>
+                <li>
+                        Pick an array size to do the arithmetic on.
+                        Something like 16384 (16K) will do.
+                        Don't pick something too huge, as your machine may not allow you to use that much memory.
+                        Don't pick something too small, as the overhead of using threading might dominate the
+                        parallelism gains.
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        Using OpenMP, pairwise multiply two large floating-point arrays, putting the results in another
+                        array.
+                        Do this in a for-loop.
+                        <br>
+                        <tt>C[ i ] = A[ i ] * B[ i ];</tt>
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        Do this for one thread and do this for four threads:
+                        <br>
+                        #define NUMT 1
+                        <br>
+                        and
+                        <br>
+                        #define NUMT 4
+
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        Time the two runs.
+                        Convert the timing results into "Mega-Multiplies per Second".
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        What speedup, S, are you seeing when you move from 1 thread to 4 threads?
+                        <br>
+                        <font size="+2"><b>S</b></font> = (Execution time with one thread) / (Execution time with four
+                        threads)
+                        = (Performance with for threads) / (Performance with one thread)
+                        <br>
+                        This number shoud be greater than 1.0 .
+                        If not, be sure you are using the correct numerator and denominator.
+
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        If your 1-thread-to-4-threads speedup is
+                        <font size="+2"><b>S</b></font>,
+                        compute the parallel fraction:
+                        <tt>
+                                <pre>float Fp = (4./3.)*( 1. - (1./S) );
+</pre></tt>
+                        Don't worry what this means just yet.
+                        This will become more meaningful soon.
+                        <br>
+                        You must have used 1-thread-to-4-threads.
+                        The numbers in this equation depend on that.
+
+                        <p>
+                        </p>
+                </li>
+                <li>
+                        Your written commentary (turned in as a PDF file) should include:
+                        <ol>
+                                <li>Tell what machine you ran this on
+                                </li>
+                                <li>What performance results did you get?
+                                </li>
+                                <li>What was your 4-thread-to-one-thread speedup?
+                                </li>
+                                <li>If the 4-thread-to-one-thread speedup is less than 4.0, why do you think it is this
+                                        way?
+                                </li>
+                                <li>What was your Parallel Fraction, Fp?
+                                </li>
+                        </ol>
+
+                </li>
+        </ol>
+
+        <p>
+        </p>
+        <h3>The main Program</h3>
+
+        <p>
+                Your main program would then look something like this:
+
+        </p>
+        <p>
+        </p>
+        <pre><tt>
+#include &lt;omp.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define NUMT	         4
+#define SIZE       	??	// you decide
+#define NUMTRIES        ??	// you decide
+
+float A[SIZE];
+float B[SIZE];
+float C[SIZE];
+
+int
+main( )
+{
+#ifndef _OPENMP
+        fprintf( stderr, "OpenMP is not supported here -- sorry.\n" );
+        return 1;
+#endif
+
+	// inialize the arrays:
+	for( int i = 0 i &lt; SIZE; i++ )
+	{
+		A[ i ] = 1.;
+		B[ i ] = 2.;
+	}
+
+        omp_set_num_threads( NUMT );
+        fprintf( stderr, "Using %d threads\n", NUMT );
+
+        double maxMegaMults = 0.;
+
+        for( int t = 0; t &lt; NUMTRIES; t++ )
+        {
+                double time0 = omp_get_wtime( );
+
+                #pragma omp parallel for
+                for( int i = 0; i &lt; SIZE; i++ )
+                {
+                        C[i] = A[i] * B[i];
+                }
+
+                double time1 = omp_get_wtime( );
+                double megaMults = (double)SIZE/(time1-time0)/1000000.;
+                if( megaMults &gt; maxMegaMults )
+                        maxMegaMults = megaMults;
+        }
+
+        printf( "Peak Performance = %8.2lf MegaMults/Sec\n", maxMegaMults );
+
+	// note: %lf stands for "long float", which is how printf prints a "double"
+	//        %d stands for "decimal integer", not "double"
+
+        return 0;
+}
+</tt></pre>
+
+
+
+
+        <p>
+        </p>
+        <h3>Grading:</h3>
+
+        <p>
+        </p>
+        <center>
+                <table border="1">
+                        <tbody>
+                                <tr>
+                                        <th>Feature</th>
+                                        <th>Points
+                                        </th>
+                                </tr>
+                                <tr>
+                                        <td>Execution time results for 1 thread</td>
+                                        <td align="right">5
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Execution time results for 4 threads</td>
+                                        <td align="right">5
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>One-thread-to-four-threads Speedup (&gt;1.)</td>
+                                        <td align="right">5
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Parallel Fraction</td>
+                                        <td align="right">10
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Commentary</td>
+                                        <td align="right">5
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <th align="left">Potential Total</th>
+                                        <th align="right">30
+                                        </th>
+                                </tr>
+                        </tbody>
+                </table>
+        </center>
+
+
+
+
+</body>
+
+</html>
