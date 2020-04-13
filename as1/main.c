@@ -41,6 +41,7 @@ int main(int argc, char **argv)
         }
 
         double end = omp_get_wtime();
+        printf("Start - End: %8.15lf\n", (end - start) / 1000000.0);
         double megaMults = (double)SIZE / (end - start) / 1000000.0;
         if (megaMults > maxMegaMults)
         {

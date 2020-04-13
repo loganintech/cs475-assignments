@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <omp.h>
+#include <stdio.h>
 
 // setting the number of threads:
 #ifndef NUMT
@@ -45,9 +46,9 @@ int main(int argc, char *argv[])
     omp_set_num_threads(NUMT); // set the number of threads to use in the for-loop:`
 
     // better to define these here so that the rand() calls don't get into the thread timing:
-    float *xcs = new float[NUMTRIALS];
-    float *ycs = new float[NUMTRIALS];
-    float *rs = new float[NUMTRIALS];
+    float *xcs = (float *)malloc(sizeof(float) * NUMTRIALS);
+    float *ycs = (float *)malloc(sizeof(float) * NUMTRIALS);
+    float *rs = (float *)malloc(sizeof(float) * NUMTRIALS);
 
     // fill the random-value arrays:
     for (int n = 0; n < NUMTRIALS; n++)
@@ -82,12 +83,18 @@ int main(int argc, char *argv[])
             float c = xc * xc + yc * yc - r * r;
             float d = b * b - 4. * a * c;
 
+            if (d < 0.0)
+                continue;
+
             // hits the circle:
             // get the first intersection:
             d = sqrt(d);
             float t1 = (-b + d) / (2. * a); // time to intersect the circle
             float t2 = (-b - d) / (2. * a); // time to intersect the circle
             float tmin = t1 < t2 ? t1 : t2; // only care about the first intersection
+
+            if (tmin < 0.0)
+                continue;
 
             // where does it intersect the circle?
             float xcir = tmin;
@@ -114,6 +121,8 @@ int main(int argc, char *argv[])
 
             // find out if it hits the infinite plate:
             float tt = (0. - ycir) / outy;
+            if (tt > 0.0)
+                numHits++;
         }
         double time1 = omp_get_wtime();
         double megaTrialsPerSecond = (double)NUMTRIALS / (time1 - time0) / 1000000.;
@@ -121,6 +130,8 @@ int main(int argc, char *argv[])
             maxPerformance = megaTrialsPerSecond;
         currentProb = (float)numHits / (float)NUMTRIALS;
     }
+    printf("Prob: %f\n", currentProb);
+    printf("Perf: %f\n", maxPerformance);
 }
 
 float Ranf(float low, float high)

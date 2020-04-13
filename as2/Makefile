@@ -1,4 +1,4 @@
-CC = clang -O3 -fopenmp main.c -o opmmonte
+CC = clang -O3 -fopenmp -lm main.c -o monte.o -DNUMTRIES=1000
 
 1:
 	$(CC) -DNUMT=1
@@ -13,7 +13,7 @@ CC = clang -O3 -fopenmp main.c -o opmmonte
 	$(CC) -DNUMT=12
 
 clean:
-	@rm opmmonte
+	@rm monte.o
 
 bench:
-	@hyperfine  --show-output ./opmmonte 2>/dev/null | rg "([0-9]+\.[0-9]{2})" -o | sort -rn | head -n 1
+	@hyperfine  --show-output ./monte.o 2>/dev/null | rg "([0-9]+\.[0-9]{2})" -o | sort -rn | head -n 1
