@@ -1,0 +1,74 @@
+[
+    {
+        "area": 6.481750,
+        "nodes": 2000,
+        "threads": 12,
+        "meganodes": 123.407253
+    },
+    {
+        "area": 6.482069,
+        "nodes": 2000,
+        "threads": 11,
+        "meganodes": 119.200387
+    },
+    {
+        "area": 6.481351,
+        "nodes": 2000,
+        "threads": 10,
+        "meganodes": 88.121184
+    },
+    {
+        "area": 6.481717,
+        "nodes": 2000,
+        "threads": 9,
+        "meganodes": 98.865719
+    },
+    {
+        "area": 6.483333,
+        "nodes": 2000,
+        "threads": 8,
+        "meganodes": 87.753830
+    },
+    {
+        "area": 6.483784,
+        "nodes": 2000,
+        "threads": 7,
+        "meganodes": 77.505802
+    },
+    {
+        "area": 6.488411,
+        "nodes": 2000,
+        "threads": 6,
+        "meganodes": 67.016114
+    },
+    {
+        "area": 6.482276,
+        "nodes": 2000,
+        "threads": 5,
+        "meganodes": 72.876927
+    },
+    {
+        "area": 6.490974,
+        "nodes": 2000,
+        "threads": 4,
+        "meganodes": 59.142802
+    },
+    {
+        "area": 6.480195,
+        "nodes": 2000,
+        "threads": 3,
+        "meganodes": 45.867334
+    },
+    {
+        "area": 6.460046,
+        "nodes": 2000,
+        "threads": 2,
+        "meganodes": 31.494325
+    },
+    {
+        "area": 6.427982,
+        "nodes": 2000,
+        "threads": 1,
+        "meganodes": 15.941469
+    }
+]

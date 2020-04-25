@@ -12,11 +12,11 @@ bench:
 per_thread:
 	for i in 12 11 10 9 8 7 6 5 4 3 2 1; do \
 		$(CC) -DNUMT=$$i ;\
-		./superquad.o; \
+		./superquad.o | rg "\{.*\}," -o >> thread_records.json; \
 	done
 
 per_nodes:
 	for i in 500 1000 1500 2000 2500 3000 3500 4000; do \
 		$(CC) -DNUMNODES=$$i -DNUMT=12;\
-		./superquad.o; \
+		./superquad.o | rg "\{.*\}," -o >> node_records.json;\
 	done
