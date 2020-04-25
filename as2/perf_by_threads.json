@@ -1,0 +1,74 @@
+[
+    {
+        "prob": 0.131393,
+        "mega_trials": 660.936646,
+        "num_threads": 12,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131423,
+        "mega_trials": 613.561157,
+        "num_threads": 11,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131160,
+        "mega_trials": 564.661255,
+        "num_threads": 10,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131341,
+        "mega_trials": 508.893951,
+        "num_threads": 9,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131404,
+        "mega_trials": 443.466278,
+        "num_threads": 8,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131223,
+        "mega_trials": 396.062714,
+        "num_threads": 7,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131304,
+        "mega_trials": 448.396851,
+        "num_threads": 6,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131089,
+        "mega_trials": 381.092499,
+        "num_threads": 5,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.130956,
+        "mega_trials": 298.166199,
+        "num_threads": 4,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.130932,
+        "mega_trials": 227.062805,
+        "num_threads": 3,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131296,
+        "mega_trials": 153.278183,
+        "num_threads": 2,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.131522,
+        "mega_trials": 76.563545,
+        "num_threads": 1,
+        "num_trials": 1000000
+    }
+]

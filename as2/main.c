@@ -17,7 +17,7 @@
 
 // how many tries to discover the maximum performance:
 #ifndef NUMTRIES
-#define NUMTRIES 10
+#define NUMTRIES 10000
 #endif
 
 // ranges for the random numbers:
@@ -130,8 +130,11 @@ int main(int argc, char *argv[])
             maxPerformance = megaTrialsPerSecond;
         currentProb = (float)numHits / (float)NUMTRIALS;
     }
-    printf("Prob: %f\n", currentProb);
-    printf("Perf: %f\n", maxPerformance);
+    printf("Probability: %f\n", currentProb);
+    printf("MegaTrials: %f\n", maxPerformance);
+    printf("Num Threads: %d\n", NUMT);
+    printf("Num Trials: %d\n", NUMTRIALS);
+    printf("script: { \"prob\": %f, \"mega_trials\": %f, \"num_threads\": %d, \"num_trials\": %d },\n", currentProb, maxPerformance, NUMT, NUMTRIALS);
 }
 
 float Ranf(float low, float high)

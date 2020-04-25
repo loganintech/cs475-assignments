@@ -1,0 +1,38 @@
+[
+    {
+        "prob": 0.100000,
+        "mega_trials": 52.428799,
+        "num_threads": 12,
+        "num_trials": 100
+    },
+    {
+        "prob": 0.143000,
+        "mega_trials": 349.525330,
+        "num_threads": 12,
+        "num_trials": 1000
+    },
+    {
+        "prob": 0.130900,
+        "mega_trials": 776.722961,
+        "num_threads": 12,
+        "num_trials": 10000
+    },
+    {
+        "prob": 0.129580,
+        "mega_trials": 676.500671,
+        "num_threads": 12,
+        "num_trials": 100000
+    },
+    {
+        "prob": 0.130906,
+        "mega_trials": 646.869812,
+        "num_threads": 12,
+        "num_trials": 1000000
+    },
+    {
+        "prob": 0.130972,
+        "mega_trials": 642.135986,
+        "num_threads": 12,
+        "num_trials": 10000000
+    }
+]
