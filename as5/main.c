@@ -1,11 +1,15 @@
 #include <xmmintrin.h>
 #include <omp.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 #define SSE_WIDTH 4
 
 #ifndef ARRAY_SIZE
-#define ARRAY_SIZE 1024 // 1kb
+#define ARRAY_SIZE 1024 * 1024 // 1kb
 #endif
+
+#define NUM_TRIES 1024
 
 float NormalMulSum(float *a, float *b, int len)
 {
@@ -43,20 +47,36 @@ float SimdMulSum(float *a, float *b, int len)
 
 int main()
 {
-    float a[ARRAY_SIZE];
-    float b[ARRAY_SIZE];
+    float *a = (float *)malloc(sizeof(float) * ARRAY_SIZE);
+    float *b = (float *)malloc(sizeof(float) * ARRAY_SIZE);
     for (int i = 0; i < ARRAY_SIZE; i++)
     {
-        a[i] = 3.0;
+        a[i] = 4.0;
         b[i] = 2.0;
     }
 
-    double time0 = omp_get_wtime();
-    float sum = NormalMulSum(a, b, ARRAY_SIZE);
-    double time1 = omp_get_wtime();
-    float simd_sum = SimdMulSum(a, b, ARRAY_SIZE);
-    double time2 = omp_get_wtime();
+    double best_normal_diff = 10000000000;
+    double best_simd_diff = 10000000000;
+    for (int i = 0; i < NUM_TRIES; i++)
+    {
+        double time0 = omp_get_wtime();
+        float sum = NormalMulSum(a, b, ARRAY_SIZE);
+        double time1 = omp_get_wtime();
+        float simd_sum = SimdMulSum(a, b, ARRAY_SIZE);
+        double time2 = omp_get_wtime();
+        if (time2 - time1 < best_simd_diff)
+        {
+            best_simd_diff = time2 - time1;
+        }
+        if (time2 - time1 < best_normal_diff)
+        {
+            best_normal_diff = time1 - time0;
+        }
+        assert(sum == simd_sum);
+    }
 
-    printf("Sum/SimdSum: %d - %d\n", sum, simd_sum);
-    printf("{\"array_size\": %d, \"control_time\": %d, \"simd_time\": %d}\n", ARRAY_SIZE, time1 - time0, time2 - time1);
+    // printf("Sum/SimdSum: %f - %f\n", sum, simd_sum);
+    printf("{\"array_size\": %d, \"control_time\": %f, \"simd_time\": %f},\n", ARRAY_SIZE, best_normal_diff, best_simd_diff);
+    free(a);
+    free(b);
 }
