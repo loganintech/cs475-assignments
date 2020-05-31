@@ -1,0 +1,9 @@
+/bin/sh: line 1: 30974 Killed                  ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 31150 Killed                  ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 31370 Killed                  ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 31604 Killed                  ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 32093 Killed                  ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 32432 Bus error               (core dumped) ./second.o 2>> mulsum_results.txt
+/bin/sh: line 1: 32930 Killed                  ./second.o 2>> mulsum_results.txt
+make: *** [benchsecond] Error 137
+slurmstepd: error: Detected 6 oom-kill event(s) in step 16098.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
