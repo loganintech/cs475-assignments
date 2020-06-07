@@ -1,0 +1,5 @@
+No Parallelism:0.0367116
+SIMD Parallelism:0.150806
+OMP 1-Thread:0.0374283
+OMP 12-Threads:0.347714
+OpenCL:3.72827
