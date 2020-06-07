@@ -2,7 +2,8 @@ CC = g++ -O3 src/main.cpp src/cl.h /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 -lm 
 
 clean:
 	-@rm *.o
-	-@rm *.txt
+	-@rm data.txt
+	-@rm performance.txt
 	-@rm *.png
 
 main:
